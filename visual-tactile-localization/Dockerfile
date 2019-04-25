@@ -8,11 +8,15 @@ ENV DEBIAN_FRONTEND=noninteractive
 RUN apt update
 
 # Install essentials
-RUN apt install -y apt-utils sudo psmisc lsb-release tmux nano wget curl \
+RUN apt install -y apt-utils software-properties-common sudo psmisc lsb-release tmux nano wget curl \
                    build-essential git gitk cmake cmake-curses-gui libedit-dev libxml2-dev
 
 # Install graphics
 RUN apt install -y xfce4 xfce4-goodies xvfb x11vnc firefox
+
+# Install Mesa for GPU emulation
+RUN add-apt-repository ppa:ubuntu-x-swat/updates -y && \
+    apt dist-upgrade -y
 
 # Install terminator
 RUN apt install -y terminator

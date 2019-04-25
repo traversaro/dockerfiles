@@ -8,7 +8,7 @@ ENV DEBIAN_FRONTEND=noninteractive
 RUN apt update
 
 # Install essentials
-RUN apt install -y apt-utils sudo psmisc lsb-release tmux nano wget curl \
+RUN apt install -y apt-utils software-properties-common sudo psmisc lsb-release tmux nano wget curl \
                    build-essential git gitk cmake cmake-curses-gui libedit-dev libxml2-dev
 
 # Install graphics

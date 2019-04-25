@@ -46,6 +46,9 @@ RUN apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 57A5ACB6110576A6
 RUN apt update
 RUN apt install -y icub-common
 
+# Install Qt patch for Xfce
+RUN apt install -y qml-module-qt-labs-folderlistmodel qml-module-qt-labs-settings
+
 # Select branch + build type
 ARG BRANCH=devel
 ARG BUILD_TYPE=Release

@@ -8,11 +8,23 @@ ENV DEBIAN_FRONTEND=noninteractive
 RUN apt update
 
 # Install essentials
-RUN apt install -y apt-utils software-properties-common sudo psmisc lsb-release tmux nano wget curl \
-                   build-essential git gitk cmake cmake-curses-gui libedit-dev libxml2-dev
+RUN apt install -y apt-utils software-properties-common sudo psmisc lsb-release \
+                   tmux nano wget curl build-essential git gitk cmake cmake-curses-gui \
+                   libedit-dev libxml2-dev autoconf                   
 
 # Install graphics
-RUN apt install -y xfce4 xfce4-goodies xvfb x11vnc firefox
+RUN apt install -y xfce4 xfce4-goodies xvfb firefox
+
+# We need the most recent x11vnc
+RUN sed -Ei 's/^# deb-src /deb-src /' /etc/apt/sources.list && \
+    apt update
+RUN git clone https://github.com/LibVNC/x11vnc.git /opt/x11vnc && \
+    cd /opt/x11vnc && \
+    apt build-dep -y x11vnc && \
+    autoreconf -fiv && \
+    ./configure && \
+    make && make install && \
+    rm /opt/x11vnc -Rf
 
 # Install Mesa for GPU emulation
 RUN add-apt-repository ppa:ubuntu-x-swat/updates -y && \

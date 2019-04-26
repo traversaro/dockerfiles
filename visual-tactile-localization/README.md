@@ -1,4 +1,6 @@
-Dockerfile for building the dependencies of https://github.com/robotology-playground/visual-tactile-localization
+Dockerfile for building the dependencies of https://github.com/robotology-playground/visual-tactile-localization.
+
+Note that the dataset used for the experiment is preloaded in `/home/gitpod/Desktop`.
 
 ## Build the image
 ```sh

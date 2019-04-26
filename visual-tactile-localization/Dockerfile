@@ -24,7 +24,7 @@ RUN git clone https://github.com/LibVNC/x11vnc.git /opt/x11vnc && \
     autoreconf -fiv && \
     ./configure && \
     make && make install && \
-    rm /opt/x11vnc -Rf
+    rm -Rf /opt/x11vnc
 
 # Install Mesa for GPU emulation
 RUN add-apt-repository ppa:ubuntu-x-swat/updates -y && \
@@ -157,6 +157,12 @@ RUN echo "startxfce4 &" >> /usr/bin/start-vnc-session.sh
 RUN echo "x11vnc -display :1 -N -forever &" >> /usr/bin/start-vnc-session.sh
 RUN echo "/opt/novnc/utils/launch.sh --web /opt/novnc --vnc 0.0.0.0:5901 --listen 6080 &" >> /usr/bin/start-vnc-session.sh
 RUN chmod +x /usr/bin/start-vnc-session.sh
+
+# Download the dataset
+WORKDIR /home/gitpod/Desktop
+RUN wget --output-document dataset_in_hand_tracking_iros_2019.zip https://ndownloader.figshare.com/files/14954744 && \
+    unzip dataset_in_hand_tracking_iros_2019.zip && \
+    rm dataset_in_hand_tracking_iros_2019.zip
 
 # Manage x11vnc port
 EXPOSE 5901

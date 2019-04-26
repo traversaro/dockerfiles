@@ -28,7 +28,8 @@ RUN git clone https://github.com/LibVNC/x11vnc.git /opt/x11vnc && \
 
 # Install Mesa for GPU emulation
 RUN add-apt-repository ppa:ubuntu-x-swat/updates -y && \
-    apt dist-upgrade -y
+    apt dist-upgrade -y && \
+    apt install -y mesa-utils
 
 # Install terminator
 RUN apt install -y terminator

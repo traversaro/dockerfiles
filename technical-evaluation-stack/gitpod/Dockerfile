@@ -13,7 +13,8 @@ RUN apt install -y apt-utils software-properties-common sudo psmisc lsb-release 
                    libedit-dev libxml2-dev autoconf
 
 # Install graphics
-RUN apt install -y xfce4 xfce4-goodies xvfb firefox
+RUN apt install -y xfce4 xfce4-goodies xserver-xorg-video-dummy firefox
+COPY xorg.conf /etc/X11/xorg.conf
 
 # We need the most recent x11vnc
 RUN sed -Ei 's/^# deb-src /deb-src /' /etc/apt/sources.list && \
@@ -154,7 +155,7 @@ RUN echo "cd /workspace && jupyter notebook --ip=0.0.0.0 --port=8888 --no-browse
 RUN chmod +x /usr/bin/start-jupyter.sh
 
 # Set up script to launch graphics and vnc
-RUN echo "Xvfb :1 -screen 0 1366x768x16 &" >> /usr/bin/start-vnc-session.sh
+RUN echo "X :1 -config /etc/X11/xorg.conf &" >> /usr/bin/start-vnc-session.sh
 RUN echo "startxfce4 &" >> /usr/bin/start-vnc-session.sh
 RUN echo "x11vnc -display :1 -N -forever &" >> /usr/bin/start-vnc-session.sh
 RUN echo "/opt/novnc/utils/launch.sh --web /opt/novnc --vnc 0.0.0.0:5901 --listen 6080 &" >> /usr/bin/start-vnc-session.sh

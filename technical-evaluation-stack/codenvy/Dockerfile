@@ -13,7 +13,8 @@ RUN apt install -y apt-utils software-properties-common sudo psmisc lsb-release 
                    libedit-dev libxml2-dev autoconf
 
 # Install graphics
-RUN apt install -y xfce4 xfce4-goodies xvfb firefox
+RUN apt install -y xfce4 xfce4-goodies xserver-xorg-video-dummy firefox
+COPY xorg.conf /etc/X11/xorg.conf
 
 # We need the most recent x11vnc
 RUN sed -Ei 's/^# deb-src /deb-src /' /etc/apt/sources.list && \

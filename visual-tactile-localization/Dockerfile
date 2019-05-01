@@ -118,6 +118,8 @@ RUN rm -Rf bayes-filters-lib
 
 # Build superimpose-mesh-lib
 RUN git clone https://github.com/robotology/superimpose-mesh-lib.git -b devel
+# Apply patch
+RUN sed -i '/GLFW_CONTEXT_RELEASE_BEHAVIOR/d' ./superimpose-mesh-lib/src/SuperimposeMesh/src/SICAD.cpp
 RUN cd superimpose-mesh-lib && mkdir build && cd build && \
     cmake .. \
     -DCMAKE_BUILD_TYPE=$BUILD_TYPE && \

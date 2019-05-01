@@ -13,7 +13,8 @@ RUN apt install -y apt-utils software-properties-common sudo psmisc lsb-release 
                    libedit-dev libxml2-dev autoconf
 
 # Install graphics
-RUN apt install -y xfce4 xfce4-goodies xserver-xorg-video-dummy firefox
+RUN apt install -y xfce4 xfce4-goodies xserver-xorg-video-dummy xserver-xorg-legacy firefox
+RUN sed -i 's/allowed_users=console/allowed_users=anybody/' /etc/X11/Xwrapper.config
 COPY xorg.conf /etc/X11/xorg.conf
 
 # We need the most recent x11vnc

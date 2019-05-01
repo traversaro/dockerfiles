@@ -153,10 +153,7 @@ ENV YARP_DATA_DIRS=/usr/local/share/yarp:/usr/local/share/iCub:/home/gitpod/iCub
 ENV LD_LIBRARY_PATH=/usr/local/lib/yarp:/usr/local/lib/robottestingframework
 
 # Set up script to launch graphics and vnc
-RUN echo "X :1 -config /etc/X11/xorg.conf &" >> /usr/bin/start-vnc-session.sh
-RUN echo "startxfce4 &" >> /usr/bin/start-vnc-session.sh
-RUN echo "x11vnc -display :1 -N -forever &" >> /usr/bin/start-vnc-session.sh
-RUN echo "/opt/novnc/utils/launch.sh --web /opt/novnc --vnc 0.0.0.0:5901 --listen 6080 &" >> /usr/bin/start-vnc-session.sh
+COPY start-vnc-session.sh /usr/bin/start-vnc-session.sh
 RUN chmod +x /usr/bin/start-vnc-session.sh
 
 # Download the dataset

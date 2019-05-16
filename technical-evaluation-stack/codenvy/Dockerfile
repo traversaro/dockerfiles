@@ -74,13 +74,13 @@ RUN cd ycm && mkdir build && cd build && \
     make install
 RUN rm -Rf ycm
 
-# Build robot-testing
-RUN git clone https://github.com/robotology/robot-testing.git -b $BRANCH
-RUN cd robot-testing && mkdir build && cd build && \
+# Build robot-testing-framework
+RUN git clone https://github.com/robotology/robot-testing-framework.git -b $BRANCH
+RUN cd robot-testing-framework && mkdir build && cd build && \
     cmake .. \
     -DCMAKE_BUILD_TYPE=$BUILD_TYPE && \
     make install
-RUN rm -Rf robot-testing
+RUN rm -Rf robot-testing-framework
 
 # Build yarp
 RUN git clone https://github.com/robotology/yarp.git -b $BRANCH

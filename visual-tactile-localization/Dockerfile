@@ -37,7 +37,7 @@ RUN add-apt-repository ppa:ubuntu-x-swat/updates -y && \
 RUN apt install -y terminator
 
 # Install websockify
-RUN apt install -y python python-dev python-pip
+RUN apt install -y python python-dev python-pip python-setuptools
 RUN git clone https://github.com/novnc/websockify.git /opt/websockify && \
     cd /opt/websockify && \
     python setup.py install

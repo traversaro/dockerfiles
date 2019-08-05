@@ -39,7 +39,7 @@ RUN apt install -y nodejs npm
 RUN npm install --global markserv
 
 # Install jupyter
-RUN apt install -y python python-dev python-pip ipython
+RUN apt install -y python python-dev python-pip ipython python-setuptools
 RUN pip install jupyter
 
 # Install terminator

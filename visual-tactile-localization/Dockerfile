@@ -153,7 +153,7 @@ USER root
 # Set environmental variables
 ENV DISPLAY=:1
 ENV YARP_DATA_DIRS=/usr/local/share/yarp:/usr/local/share/iCub:/home/gitpod/iCubContrib/share/ICUBcontrib
-ENV LD_LIBRARY_PATH=/usr/local/lib/yarp:/usr/local/lib/robottestingframework
+ENV LD_LIBRARY_PATH=/usr/local/lib/yarp
 
 # Set up script to launch graphics and vnc
 COPY start-vnc-session.sh /usr/bin/start-vnc-session.sh

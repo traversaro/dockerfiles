@@ -121,7 +121,8 @@ RUN rm -Rf icub-main
 
 # Build simox
 RUN git clone https://gitlab.com/Simox/simox.git
-RUN cd simox && mkdir build && cd build && \
+# build directory is verioned
+RUN cd simox/build && \
     cmake .. \
     -DCMAKE_BUILD_TYPE=$BUILD_TYPE -DSimDynamics_USE_BULLET=off \
     -DSimDynamics_USE_BULLET_USE_GLU=off -DSimox_BUILD_Simdynamics=off \

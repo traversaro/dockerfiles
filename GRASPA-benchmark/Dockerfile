@@ -57,7 +57,7 @@ RUN echo "deb http://packages.humanoids.kit.edu/bionic/testing `lsb_release -cs`
 RUN apt update
 
 # Install Qt5
-RUN apt install -y qt5-default qtbase5-dev libqt5concurrent5 libqt5test5 libqt5core5a libqt5opengl5 qtdeclarative5-dev
+RUN apt install -y qt5-default
 
 # Install Qt patch for Xfce and optional dependencies for qt5-powered
 RUN apt install -y qml-module-qt-labs-folderlistmodel qml-module-qt-labs-settings \
@@ -76,8 +76,8 @@ RUN git clone https://gitlab.com/Simox/simox.git
 # build directory is versioned
 RUN cd simox/build && \
     cmake .. \
-    -DCMAKE_BUILD_TYPE=$BUILD_TYPE -DSimDynamics_USE_BULLET=off \
-    -DSimDynamics_USE_BULLET_USE_GLU=off -DSimox_BUILD_SimDynamics=off \
+    -DCMAKE_BUILD_TYPE=$BUILD_TYPE -DSimDynamics_USE_BULLET=OFF \
+    -DSimDynamics_USE_BULLET_USE_GLU=OFF -DSimox_BUILD_SimDynamics=OFF \
     -DSimox_USE_QT5=ON && \
     make install
 RUN rm -Rf simox

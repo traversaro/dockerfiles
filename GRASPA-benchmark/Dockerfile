@@ -56,8 +56,11 @@ RUN echo "deb http://packages.humanoids.kit.edu/bionic/main `lsb_release -cs` ma
 RUN echo "deb http://packages.humanoids.kit.edu/bionic/testing `lsb_release -cs` testing" >> /etc/apt/sources.list.d/armarx.list
 RUN apt update
 
+# Install Qt5
+RUN apt install -y qt5-default qtbase5-dev libqt5concurrent5 libqt5test5 libqt5core5a libqt5opengl5 qtdeclarative5-dev
+
 # Install Qt patch for Xfce and optional dependencies for qt5-powered
-RUN apt install -y qt5-default qml-module-qt-labs-folderlistmodel qml-module-qt-labs-settings \
+RUN apt install -y qml-module-qt-labs-folderlistmodel qml-module-qt-labs-settings \
                    libqt5designer5 libqt5designercomponents5
 
 # Install simox dependencies

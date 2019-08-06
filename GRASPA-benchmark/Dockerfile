@@ -125,7 +125,7 @@ RUN git clone https://gitlab.com/Simox/simox.git
 RUN cd simox/build && \
     cmake .. \
     -DCMAKE_BUILD_TYPE=$BUILD_TYPE -DSimDynamics_USE_BULLET=off \
-    -DSimDynamics_USE_BULLET_USE_GLU=off -DSimox_BUILD_Simdynamics=off \
+    -DSimDynamics_USE_BULLET_USE_GLU=off -DSimox_BUILD_SimDynamics=off \
     -DSimox_USE_QT5=ON && \
     make install
 RUN rm -Rf simox

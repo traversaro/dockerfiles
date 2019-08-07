@@ -66,7 +66,6 @@ RUN apt install -y qml-module-qt-labs-folderlistmodel qml-module-qt-labs-setting
 # Install simox dependencies
 RUN apt install -y libboost-all-dev libeigen3-dev libnlopt-dev freeglut3-dev libqhull-dev liburdfdom-dev \
                    h2t-libbullet h2t-libsoqt5-dev h2t-libsimage-dev h2t-libcoin80-dev
-RUN pip3 install numpy numpy-stl opencv-python opencv-contrib-python scipy 
 
 # Select global compilation options
 ARG BUILD_TYPE=Release
@@ -87,6 +86,9 @@ RUN useradd -l -u 33333 -G sudo -md /home/gitpod -s /bin/bash -p gitpod gitpod &
     # passwordless sudo for users in the 'sudo' group
     sed -i.bkp -e 's/%sudo\s\+ALL=(ALL\(:ALL\)\?)\s\+ALL/%sudo ALL=NOPASSWD:ALL/g' /etc/sudoers
 USER gitpod
+
+# Install python packages
+RUN pip3 install numpy numpy-stl opencv-python opencv-contrib-python scipy 
 
 # Set up .bashrc
 RUN echo "PS1='\[\e]0;\u \w\a\]\[\033[01;32m\]\u\[\033[00m\] \[\033[01;34m\]\w\[\033[00m\] \$ '" >> ~/.bashrc

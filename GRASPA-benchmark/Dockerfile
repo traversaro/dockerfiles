@@ -65,7 +65,7 @@ RUN apt install -y qml-module-qt-labs-folderlistmodel qml-module-qt-labs-setting
 
 # Install simox dependencies
 RUN apt install -y libboost-all-dev libeigen3-dev libnlopt-dev freeglut3-dev libqhull-dev liburdfdom-dev \
-                   h2t-libbullet h2t-libsoqt5-dev h2t-libsimage-dev h2t-libcoin80-dev
+                   libassimp-dev h2t-libbullet h2t-libsoqt5-dev h2t-libsimage-dev h2t-libcoin80-dev
 
 # Select global compilation options
 ARG BUILD_TYPE=Release

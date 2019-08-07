@@ -10,7 +10,7 @@ RUN apt update
 # Install essentials
 RUN apt install -y apt-utils software-properties-common sudo psmisc lsb-release \
                    tmux nano wget curl build-essential git gitk cmake cmake-curses-gui \
-                   libedit-dev libxml2-dev autoconf                   
+                   libedit-dev libxml2-dev autoconf
 
 # Install graphics
 RUN apt install -y xfce4 xfce4-goodies xserver-xorg-video-dummy xserver-xorg-legacy firefox
@@ -27,11 +27,6 @@ RUN git clone https://github.com/LibVNC/x11vnc.git /opt/x11vnc && \
     ./configure && \
     make && make install && \
     rm -Rf /opt/x11vnc
-
-# Install Mesa for GPU emulation
-RUN add-apt-repository ppa:ubuntu-x-swat/updates -y && \
-    apt dist-upgrade -y && \
-    apt install -y mesa-utils
 
 # Install terminator
 RUN apt install -y terminator
@@ -56,12 +51,11 @@ RUN echo "deb http://packages.humanoids.kit.edu/bionic/main `lsb_release -cs` ma
 RUN echo "deb http://packages.humanoids.kit.edu/bionic/testing `lsb_release -cs` testing" >> /etc/apt/sources.list.d/armarx.list
 RUN apt update
 
-# Install Qt5
-RUN apt install -y qt5-default
+# Install Qt5 and optional dependencies for qt5-powered
+RUN apt install -y qt5-default libqt5designer5 libqt5designercomponents5
 
-# Install Qt patch for Xfce and optional dependencies for qt5-powered
-RUN apt install -y qml-module-qt-labs-folderlistmodel qml-module-qt-labs-settings \
-                   libqt5designer5 libqt5designercomponents5
+# Install Qt patch for Xfce
+RUN apt install -y qml-module-qt-labs-folderlistmodel qml-module-qt-labs-settings
 
 # Install simox dependencies
 RUN apt install -y libboost-all-dev libeigen3-dev libnlopt-dev freeglut3-dev libqhull-dev liburdfdom-dev \
@@ -76,8 +70,7 @@ RUN git clone https://gitlab.com/Simox/simox.git
 RUN cd simox/build && \
     cmake .. \
     -DCMAKE_BUILD_TYPE=$BUILD_TYPE -DSimDynamics_USE_BULLET=OFF \
-    -DSimDynamics_USE_BULLET_USE_GLU=OFF -DSimox_BUILD_SimDynamics=OFF \
-    -DSimox_USE_QT5=ON && \
+    -DSimox_BUILD_SimDynamics=OFF && \
     make install
 RUN rm -Rf simox
 
@@ -88,7 +81,7 @@ RUN useradd -l -u 33333 -G sudo -md /home/gitpod -s /bin/bash -p gitpod gitpod &
 USER gitpod
 
 # Install python packages
-RUN pip3 install numpy numpy-stl opencv-python opencv-contrib-python scipy 
+RUN pip3 install numpy numpy-stl opencv-python opencv-contrib-python scipy
 
 # Set up .bashrc
 RUN echo "PS1='\[\e]0;\u \w\a\]\[\033[01;32m\]\u\[\033[00m\] \[\033[01;34m\]\w\[\033[00m\] \$ '" >> ~/.bashrc

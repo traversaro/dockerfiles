@@ -64,13 +64,14 @@ RUN apt install -y libboost-all-dev libeigen3-dev libnlopt-dev freeglut3-dev lib
 # Select global compilation options
 ARG BUILD_TYPE=Release
 
-# Build simox
+# Build simox v2.3.74
 RUN git clone https://gitlab.com/Simox/simox.git
 # build directory is versioned
 RUN cd simox/build && \
+    git checkout v2.3.74 && \
     cmake .. \
-    -DCMAKE_BUILD_TYPE=$BUILD_TYPE -DSimDynamics_USE_BULLET=OFF \
-    -DSimox_BUILD_SimDynamics=OFF && \
+    -DCMAKE_BUILD_TYPE=$BUILD_TYPE \
+    -DSimox_BUILD_SimDynamics=OFF -DSimDynamics_USE_BULLET=OFF && \
     make install
 RUN rm -Rf simox
 

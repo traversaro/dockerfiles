@@ -82,6 +82,7 @@ RUN useradd -l -u 33333 -G sudo -md /home/gitpod -s /bin/bash -p gitpod gitpod &
 USER gitpod
 
 # Set up .bashrc
+RUN echo "alias python='/usr/bin/python3.6'" >> ~/.bashrc
 RUN echo "PS1='\[\e]0;\u \w\a\]\[\033[01;32m\]\u\[\033[00m\] \[\033[01;34m\]\w\[\033[00m\] \$ '" >> ~/.bashrc
 
 # Switch back to root

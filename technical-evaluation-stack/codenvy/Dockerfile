@@ -10,7 +10,7 @@ RUN apt update
 # Install essentials
 RUN apt install -y apt-utils software-properties-common sudo psmisc lsb-release \
                    tmux nano wget curl build-essential git gitk cmake cmake-curses-gui \
-                   libedit-dev libxml2-dev autoconf
+                   libedit-dev libxml2-dev autoconf terminator
 
 # Install graphics
 RUN apt install -y xfce4 xfce4-goodies xserver-xorg-video-dummy xserver-xorg-legacy firefox
@@ -39,16 +39,13 @@ RUN apt install -y nodejs npm
 RUN npm install --global markserv
 
 # Install jupyter
-RUN apt install -y python python-dev python-pip ipython python-setuptools
-RUN pip install jupyter
-
-# Install terminator
-RUN apt install -y terminator
+RUN apt install -y python3 python3-dev python3-pip python3-setuptools
+RUN pip3 install ipython jupyter
 
 # Install websockify
 RUN git clone https://github.com/novnc/websockify.git /opt/websockify && \
     cd /opt/websockify && \
-    python setup.py install
+    python3 setup.py install
 
 # Clone noVNC
 RUN git clone https://github.com/novnc/noVNC.git /opt/novnc

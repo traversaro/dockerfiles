@@ -10,7 +10,7 @@ RUN apt update
 # Install essentials
 RUN apt install -y apt-utils software-properties-common sudo psmisc lsb-release \
                    tmux nano wget curl build-essential git gitk cmake cmake-curses-gui \
-                   libedit-dev libxml2-dev autoconf                   
+                   libedit-dev libxml2-dev autoconf terminator
 
 # Install graphics
 RUN apt install -y xfce4 xfce4-goodies xserver-xorg-video-dummy xserver-xorg-legacy firefox
@@ -33,14 +33,11 @@ RUN add-apt-repository ppa:ubuntu-x-swat/updates -y && \
     apt dist-upgrade -y && \
     apt install -y mesa-utils
 
-# Install terminator
-RUN apt install -y terminator
-
 # Install websockify
-RUN apt install -y python python-dev python-pip python-setuptools
+RUN apt install -y python3 python3-dev python3-pip python3-setuptools
 RUN git clone https://github.com/novnc/websockify.git /opt/websockify && \
     cd /opt/websockify && \
-    python setup.py install
+    python3 setup.py install
 
 # Clone noVNC
 RUN git clone https://github.com/novnc/noVNC.git /opt/novnc

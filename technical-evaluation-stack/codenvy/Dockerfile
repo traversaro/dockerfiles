@@ -13,7 +13,7 @@ RUN apt install -y apt-utils software-properties-common sudo psmisc lsb-release 
                    libedit-dev libxml2-dev autoconf terminator
 
 # Install most recent cmake
-RUN apt install apt-transport-https ca-certificates gnupg && \
+RUN apt install -y apt-transport-https ca-certificates gnupg && \
     wget -O - https://apt.kitware.com/keys/kitware-archive-latest.asc 2>/dev/null | sudo apt-key add - && \
     apt-add-repository 'deb https://apt.kitware.com/ubuntu/ bionic main' && \
     apt update && \

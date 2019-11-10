@@ -17,9 +17,9 @@ RUN apt install -y apt-transport-https ca-certificates gnupg && \
     wget -O - https://apt.kitware.com/keys/kitware-archive-latest.asc 2>/dev/null | sudo apt-key add - && \
     apt-add-repository 'deb https://apt.kitware.com/ubuntu/ bionic main' && \
     apt update && \
-    apt install kitware-archive-keyring && \
+    apt install -y kitware-archive-keyring && \
     apt-key --keyring /etc/apt/trusted.gpg del C1F34CDD40CD72DA && \
-    apt install cmake cmake-curses-gui
+    apt install -y cmake cmake-curses-gui
 
 # Install graphics
 RUN apt install -y xfce4 xfce4-goodies xserver-xorg-video-dummy xserver-xorg-legacy firefox

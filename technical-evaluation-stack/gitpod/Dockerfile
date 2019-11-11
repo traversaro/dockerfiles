@@ -151,7 +151,7 @@ USER root
 # Set environmental variables
 ENV DISPLAY=:1
 ENV YARP_DATA_DIRS=/usr/local/share/yarp:/usr/local/share/iCub:/home/gitpod/iCubContrib/share/ICUBcontrib
-ENV LD_LIBRARY_PATH=/usr/local/lib/yarp:/usr/local/lib/robottestingframework
+ENV LD_LIBRARY_PATH=/usr/local/lib:/usr/local/lib/yarp:/usr/local/lib/robottestingframework
 
 # Set up script to launch markserv
 COPY start-markserv.sh /usr/bin/start-markserv.sh

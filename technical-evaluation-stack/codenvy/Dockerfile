@@ -136,7 +136,7 @@ RUN echo "PS1='\[\e]0;\u \w\a\]\[\033[01;32m\]\u\[\033[00m\] \[\033[01;34m\]\w\[
 # Set environmental variables
 ENV DISPLAY=:1
 ENV YARP_DATA_DIRS=/usr/local/share/yarp:/usr/local/share/iCub:/usr/local/share/ICUBcontrib
-ENV LD_LIBRARY_PATH=/usr/local/lib/yarp:/usr/local/lib/robottestingframework
+ENV LD_LIBRARY_PATH=/usr/local/lib:/usr/local/lib/yarp:/usr/local/lib/robottestingframework
 
 # Manage markserv port
 EXPOSE 8080

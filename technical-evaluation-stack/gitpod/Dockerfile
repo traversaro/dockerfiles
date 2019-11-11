@@ -95,8 +95,9 @@ RUN cd yarp && mkdir build && cd build && \
     cmake .. \
     -DCMAKE_BUILD_TYPE=$BUILD_TYPE \
     -DYARP_COMPILE_libYARP_math=ON \
-    -DYARP_COMPILE_GUIS=ON \
-    -DYARP_COMPILE_DEVICE_PLUGINS=OFF && \
+    -DYARP_COMPILE_CARRIER_PLUGINS=ON \
+    -DYARP_COMPILE_DEVICE_PLUGINS=ON \
+    -DYARP_COMPILE_GUIS=ON && \
     make install
 RUN cp yarp/scripts/yarp_completion /etc/bash_completion.d/.
 RUN rm -Rf yarp

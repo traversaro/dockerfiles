@@ -56,7 +56,7 @@
                     "master"
                 ],
                 "commands": [
-                    "{\"commandLine\":\"X :1 -config /etc/X11/xorg.conf &\\r\\nstartxfce4 &\\r\\nx11vnc -display :1 -N -forever &\", \"name\":\"X11 server\", \"attributes\":{\"previewUrl\":\"${server.port.5901}\", \"goal\":\"Common\"}, \"type\":\"custom\"}"
+                    "{\"commandLine\":\"X :1 -config /etc/X11/xorg.conf &\\r\\nstartxfce4 &\\r\\nx11vnc -display :1 -N -forever -shared &\", \"name\":\"X11 server\", \"attributes\":{\"previewUrl\":\"${server.port.5901}\", \"goal\":\"Common\"}, \"type\":\"custom\"}"
                 ]
             },
             "type": "cpp",

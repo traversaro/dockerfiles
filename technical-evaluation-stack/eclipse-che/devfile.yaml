@@ -5,7 +5,7 @@ projects:
   - name: technical-evaluation
     source:
       type: github
-      location: https://github.com/pattacini/technical-evaluation.git
+      location: 'https://github.com/pattacini/technical-evaluation.git'
       branch: master
 components:
   - alias: theia-editor
@@ -13,7 +13,7 @@ components:
     id: eclipse/che-theia/next
   - alias: docker
     type: dockerimage
-    image: pattacini/technical-evaluation-stack:eclipse-che
+    image: 'pattacini/technical-evaluation-stack:eclipse-che'
     memoryLimit: 1024M
     mountSources: true
     endpoints:
@@ -47,22 +47,22 @@ commands:
      - type: exec
        component: docker
        command: X :1 -config /etc/X11/xorg.conf & && startxfce4 & && x11vnc -display :1 -N -forever -shared &
-       workdir: ${CHE_PROJECTS_ROOT}
+       workdir: '${CHE_PROJECTS_ROOT}'
   - name: Markdown server
     actions:
      - type: exec
        component: docker
        command: markserv --browser false -a 0.0.0.0 -p 8080 &
-       workdir: ${CHE_PROJECTS_ROOT}
+       workdir: '${CHE_PROJECTS_ROOT}'
   - name: Jupyter server
     actions:
      - type: exec
        component: docker
        command: jupyter notebook --ip=0.0.0.0 --port=8888 --no-browser --allow-root --NotebookApp.token='' --NotebookApp.password='' &
-       workdir: ${CHE_PROJECTS_ROOT}
+       workdir: '${CHE_PROJECTS_ROOT}'
   - name: noVNC server
     actions:
      - type: exec
        component: docker
        command: /opt/novnc/utils/launch.sh --web /opt/novnc/ --listen 6080 --vnc 0.0.0.0:5901 &
-       workdir: ${CHE_PROJECTS_ROOT}
+       workdir: '${CHE_PROJECTS_ROOT}'

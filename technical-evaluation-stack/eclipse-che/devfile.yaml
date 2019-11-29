@@ -5,7 +5,7 @@ projects:
   - name: technical-evaluation
     source:
       type: github
-      location: 'https://github.com/pattacini/technical-evaluation.git'
+      location: https://github.com/pattacini/technical-evaluation.git
       branch: master
 components:
   - alias: theia-editor
@@ -13,10 +13,9 @@ components:
     id: eclipse/che-theia/next
   - alias: docker
     type: dockerimage
-    image: 'pattacini/technical-evaluation-stack:codenvy'
+    image: pattacini/technical-evaluation-stack:eclipse-che
     memoryLimit: 1024M
     mountSources: true
-    #command: ['sleep', 'infinity']
     endpoints:
      - name: markdown
        port: 8080

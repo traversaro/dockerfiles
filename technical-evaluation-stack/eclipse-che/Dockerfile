@@ -9,7 +9,7 @@ RUN apt update
 
 # Install essentials
 RUN apt install -y apt-utils software-properties-common apt-transport-https sudo \
-    psmisc lsb-release tmux nano wget curl build-essential git gitk \
+    psmisc lsb-release tmux nano wget curl build-essential gdb git gitk \
     libedit-dev libxml2-dev autoconf gdebi
 
 # Install Hyper terminal
@@ -22,9 +22,6 @@ RUN wget -q https://packages.microsoft.com/keys/microsoft.asc -O- | apt-key add 
     apt-add-repository "deb https://packages.microsoft.com/repos/vscode stable main" && \
     apt update && \
     apt install -y code
-
-# Install clang
-RUN apt install -y clang-format clang-tidy clang-tools clang gdb lld
 
 # Install the most recent cmake
 RUN apt install -y ca-certificates gnupg && \
@@ -152,6 +149,14 @@ RUN echo "PS1='\[\e]0;\u \w\a\]\[\033[01;32m\]\u\[\033[00m\] \[\033[01;34m\]\w\[
 ENV DISPLAY=:1
 ENV YARP_DATA_DIRS=/usr/local/share/yarp:/usr/local/share/iCub:/usr/local/share/ICUBcontrib
 ENV LD_LIBRARY_PATH=/usr/local/lib:/usr/local/lib/yarp:/usr/local/lib/robottestingframework
+
+# Set up Hyper launcher
+COPY Hyper.desktop /root/Desktop/Hyper.desktop
+RUN chmod +x /root/Desktop/Hyper.desktop
+
+# Set up VSCode launcher
+COPY ["Visual Studio Code.desktop", "/home/gitpod/Desktop/Visual Studio Code.desktop"]
+RUN chmod +x "/home/gitpod/Desktop/Visual Studio Code.desktop"
 
 # Manage markserv port
 EXPOSE 8080

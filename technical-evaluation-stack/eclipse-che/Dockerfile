@@ -155,8 +155,8 @@ COPY Hyper.desktop /root/Desktop/Hyper.desktop
 RUN chmod +x /root/Desktop/Hyper.desktop
 
 # Set up VSCode launcher
-COPY ["Visual Studio Code.desktop", "/home/gitpod/Desktop/Visual Studio Code.desktop"]
-RUN chmod +x "/home/gitpod/Desktop/Visual Studio Code.desktop"
+COPY ["Visual Studio Code.desktop", "/home/root/Desktop/Visual Studio Code.desktop"]
+RUN chmod +x "/home/root/Desktop/Visual Studio Code.desktop"
 
 # Manage markserv port
 EXPOSE 8080

@@ -85,7 +85,7 @@ ARG BRANCH=devel
 ARG BUILD_TYPE=Release
 
 # Build ycm
-RUN git clone https://github.com/robotology/ycm.git
+RUN git clone https://github.com/robotology/ycm.git --depth 1
 RUN cd ycm && mkdir build && cd build && \
     cmake .. \
     -DCMAKE_BUILD_TYPE=$BUILD_TYPE && \
@@ -93,7 +93,7 @@ RUN cd ycm && mkdir build && cd build && \
 RUN rm -Rf ycm
 
 # Build robot-testing-framework
-RUN git clone https://github.com/robotology/robot-testing-framework.git -b $BRANCH
+RUN git clone https://github.com/robotology/robot-testing-framework.git --depth 1 --branch $BRANCH
 RUN cd robot-testing-framework && mkdir build && cd build && \
     cmake .. \
     -DCMAKE_BUILD_TYPE=$BUILD_TYPE && \
@@ -101,7 +101,7 @@ RUN cd robot-testing-framework && mkdir build && cd build && \
 RUN rm -Rf robot-testing-framework
 
 # Build yarp
-RUN git clone https://github.com/robotology/yarp.git
+RUN git clone https://github.com/robotology/yarp.git --depth 1
 RUN cd yarp && mkdir build && cd build && \
     cmake .. \
     -DCMAKE_BUILD_TYPE=$BUILD_TYPE \
@@ -114,7 +114,7 @@ RUN cp yarp/scripts/yarp_completion /etc/bash_completion.d/.
 RUN rm -Rf yarp
 
 # Build icub-main
-RUN git clone https://github.com/robotology/icub-main.git -b $BRANCH
+RUN git clone https://github.com/robotology/icub-main.git --depth 1 --branch $BRANCH
 RUN cd icub-main && mkdir build && cd build && \
     cmake .. \
     -DCMAKE_BUILD_TYPE=$BUILD_TYPE \
@@ -128,7 +128,7 @@ ARG GITHUB_TOKEN
 
 # Build audition-projects-helpers
 RUN git config --global url."https://$GITHUB_TOKEN:@github.com/".insteadOf "https://github.com/"
-RUN git clone https://github.com/dic-iit/audition-projects-helpers.git
+RUN git clone https://github.com/dic-iit/audition-projects-helpers.git --depth 1
 RUN git config --global --remove-section url."https://$GITHUB_TOKEN:@github.com/"
 RUN cd audition-projects-helpers && mkdir build && cd build && \
     cmake .. \

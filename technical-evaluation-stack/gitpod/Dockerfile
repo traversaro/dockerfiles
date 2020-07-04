@@ -28,14 +28,14 @@ RUN curl https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor > pac
     apt install -y code
 
 # Install graphics
-RUN apt install -y xfce4 xfce4-goodies xserver-xorg-video-dummy xserver-xorg-legacy firefox
-RUN sed -i 's/allowed_users=console/allowed_users=anybody/' /etc/X11/Xwrapper.config
+RUN apt install -y xfce4 xfce4-goodies xserver-xorg-video-dummy xserver-xorg-legacy firefox && \
+    sed -i 's/allowed_users=console/allowed_users=anybody/' /etc/X11/Xwrapper.config
 COPY xorg.conf /etc/X11/xorg.conf
 
 # We need the most recent x11vnc
 RUN sed -Ei 's/^# deb-src /deb-src /' /etc/apt/sources.list && \
-    apt update
-RUN git clone https://github.com/LibVNC/x11vnc.git /opt/x11vnc && \
+    apt update && \
+    git clone https://github.com/LibVNC/x11vnc.git /opt/x11vnc && \
     cd /opt/x11vnc && \
     apt build-dep -y x11vnc && \
     autoreconf -fiv && \
@@ -50,12 +50,12 @@ RUN apt install -y default-jdk
 RUN apt install -y octave epstool transfig
 
 # Install markserv
-RUN apt install -y nodejs npm
-RUN npm install --global markserv
+RUN apt install -y nodejs npm && \
+    npm install --global markserv
 
 # Install jupyter
-RUN apt install -y python3 python3-dev python3-pip python3-setuptools
-RUN pip3 install ipython jupyter
+RUN apt install -y python3 python3-dev python3-pip python3-setuptools && \
+    pip3 install ipython jupyter
 
 # Install websockify
 RUN git clone https://github.com/novnc/websockify.git /opt/websockify && \
@@ -63,8 +63,8 @@ RUN git clone https://github.com/novnc/websockify.git /opt/websockify && \
     python3 setup.py install
 
 # Clone noVNC
-RUN git clone https://github.com/novnc/noVNC.git /opt/novnc
-RUN echo "<html><head><meta http-equiv=\"Refresh\" content=\"0; url=vnc.html\"></head></html>" > /opt/novnc/index.html
+RUN git clone https://github.com/novnc/noVNC.git /opt/novnc && \
+    echo "<html><head><meta http-equiv=\"Refresh\" content=\"0; url=vnc.html\"></head></html>" > /opt/novnc/index.html
 
 # Install dependencies
 RUN apt install -y libeigen3-dev build-essential cmake cmake-curses-gui coinor-libipopt-dev freeglut3-dev \
@@ -79,49 +79,49 @@ ARG BRANCH=devel
 ARG BUILD_TYPE=Release
 
 # Build ycm
-RUN git clone https://github.com/robotology/ycm.git --depth 1
-RUN cd ycm && mkdir build && cd build && \
+RUN git clone https://github.com/robotology/ycm.git --depth 1 && \
+    cd ycm && mkdir build && cd build && \
     cmake .. \
     -DCMAKE_BUILD_TYPE=$BUILD_TYPE && \
-    make install
-RUN rm -Rf ycm
+    make install && \
+    rm -Rf ycm
 
 # Build robot-testing-framework
-RUN git clone https://github.com/robotology/robot-testing-framework.git --depth 1 --branch $BRANCH
-RUN cd robot-testing-framework && mkdir build && cd build && \
+RUN git clone https://github.com/robotology/robot-testing-framework.git --depth 1 --branch $BRANCH && \
+    cd robot-testing-framework && mkdir build && cd build && \
     cmake .. \
     -DCMAKE_BUILD_TYPE=$BUILD_TYPE && \
-    make install
-RUN rm -Rf robot-testing-framework
+    make install && \
+    rm -Rf robot-testing-framework
 
 # Build yarp
-RUN git clone https://github.com/robotology/yarp.git --depth 1
-RUN cd yarp && mkdir build && cd build && \
-    cmake .. && make install
-RUN rm -Rf yarp
+RUN git clone https://github.com/robotology/yarp.git --depth 1 && \
+    cd yarp && mkdir build && cd build && \
+    cmake .. && make install && \
+    rm -Rf yarp
 
 # Build icub-main
-RUN git clone https://github.com/robotology/icub-main.git --depth 1 --branch $BRANCH
-RUN cd icub-main && mkdir build && cd build && \
+RUN git clone https://github.com/robotology/icub-main.git --depth 1 --branch $BRANCH && \
+    cd icub-main && mkdir build && cd build && \
     cmake .. \
     -DCMAKE_BUILD_TYPE=$BUILD_TYPE \
     -DENABLE_icubmod_cartesiancontrollerserver=ON \
     -DENABLE_icubmod_cartesiancontrollerclient=ON \
     -DENABLE_icubmod_gazecontrollerclient=ON && \
-    make install
-RUN rm -Rf icub-main
+    make install && \
+    rm -Rf icub-main
 
 ARG GITHUB_TOKEN
 
 # Build audition-projects-helpers
-RUN git config --global url."https://$GITHUB_TOKEN:@github.com/".insteadOf "https://github.com/"
-RUN git clone https://github.com/dic-iit/audition-projects-helpers.git --depth 1
-RUN git config --global --remove-section url."https://$GITHUB_TOKEN:@github.com/"
-RUN cd audition-projects-helpers && mkdir build && cd build && \
+RUN git config --global url."https://$GITHUB_TOKEN:@github.com/".insteadOf "https://github.com/" && \
+    git clone https://github.com/dic-iit/audition-projects-helpers.git --depth 1 && \
+    git config --global --remove-section url."https://$GITHUB_TOKEN:@github.com/" && \
+    cd audition-projects-helpers && mkdir build && cd build && \
     cmake .. \
     -DCMAKE_BUILD_TYPE=$BUILD_TYPE && \
-    make install
-RUN rm -Rf audition-projects-helpers
+    make install && \
+    rm -Rf audition-projects-helpers
 
 # Set environmental variables
 ENV DISPLAY=:1

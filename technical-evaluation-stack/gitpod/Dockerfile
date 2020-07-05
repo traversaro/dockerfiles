@@ -23,6 +23,7 @@ RUN wget -O hyper.deb https://releases.hyper.is/download/deb && \
 # Install VSCode
 RUN curl https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor > packages.microsoft.gpg && \
     install -o root -g root -m 644 packages.microsoft.gpg /etc/apt/trusted.gpg.d/ && \
+    rm packages.microsoft.gpg && \
     sh -c 'echo "deb [arch=amd64 signed-by=/etc/apt/trusted.gpg.d/packages.microsoft.gpg] https://packages.microsoft.com/repos/vscode stable main" > /etc/apt/sources.list.d/vscode.list' && \
     apt update && \
     apt install -y code
@@ -41,7 +42,7 @@ RUN sed -Ei 's/^# deb-src /deb-src /' /etc/apt/sources.list && \
     autoreconf -fiv && \
     ./configure && \
     make && make install && \
-    rm /opt/x11vnc -Rf
+    rm -Rf /opt/x11vnc
 
 # Install Java
 RUN apt install -y default-jdk

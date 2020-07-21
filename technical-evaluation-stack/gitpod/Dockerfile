@@ -138,9 +138,14 @@ ENV MANPATH="${MANPATH}:/home/linuxbrew/.linuxbrew/share/man"
 ENV INFOPATH="${INFOPATH}:/home/linuxbrew/.linuxbrew/share/info"
 ENV HOMEBREW_NO_AUTO_UPDATE=1
 
+# Install informative git prompt for bash
+RUN git clone https://github.com/magicmonty/bash-git-prompt.git ~/.bash-git-prompt --depth=1
+
 # Set up .bashrc
 WORKDIR /home/gitpod
 RUN echo "unalias code 2>/dev/null" >> ~/.bashrc && \ 
+    echo "GIT_PROMPT_ONLY_IN_REPO=1" >> ~/.bashrc && \
+    echo "source ${HOME}/.bash-git-prompt/gitprompt.sh" >> ~/.bashrc && \
     echo "export PATH=${PATH}:${ICUBcontrib_DIR}/bin" >> ~/.bashrc
 
 # Switch back to root

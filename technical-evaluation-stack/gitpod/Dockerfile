@@ -78,7 +78,7 @@ RUN git clone https://github.com/robotology/ycm.git --depth 1 && \
     cmake .. \
     -DCMAKE_BUILD_TYPE=$BUILD_TYPE && \
     make install && \
-    rm -Rf ycm
+    cd ../.. && rm -Rf ycm
 
 # Build robot-testing-framework
 RUN git clone https://github.com/robotology/robot-testing-framework.git --depth 1 --branch $BRANCH && \
@@ -86,13 +86,14 @@ RUN git clone https://github.com/robotology/robot-testing-framework.git --depth 
     cmake .. \
     -DCMAKE_BUILD_TYPE=$BUILD_TYPE && \
     make install && \
-    rm -Rf robot-testing-framework
+    cd ../.. && rm -Rf robot-testing-framework
 
 # Build yarp
 RUN git clone https://github.com/robotology/yarp.git --depth 1 && \
+    cp yarp/data/bash-completion/yarp /etc/bash_completion.d && \
     cd yarp && mkdir build && cd build && \
     cmake .. && make install && \
-    rm -Rf yarp
+    cd ../.. && rm -Rf yarp
 
 # Build icub-main
 RUN git clone https://github.com/robotology/icub-main.git --depth 1 --branch $BRANCH && \
@@ -103,7 +104,7 @@ RUN git clone https://github.com/robotology/icub-main.git --depth 1 --branch $BR
     -DENABLE_icubmod_cartesiancontrollerclient=ON \
     -DENABLE_icubmod_gazecontrollerclient=ON && \
     make install && \
-    rm -Rf icub-main
+    cd ../.. && rm -Rf icub-main
 
 ARG GITHUB_TOKEN
 
@@ -115,7 +116,7 @@ RUN git config --global url."https://$GITHUB_TOKEN:@github.com/".insteadOf "http
     cmake .. \
     -DCMAKE_BUILD_TYPE=$BUILD_TYPE && \
     make install && \
-    rm -Rf audition-projects-helpers
+    cd ../.. && rm -Rf audition-projects-helpers
 
 # Set environmental variables
 ENV DISPLAY=:1
@@ -138,7 +139,7 @@ ENV MANPATH="${MANPATH}:/home/linuxbrew/.linuxbrew/share/man"
 ENV INFOPATH="${INFOPATH}:/home/linuxbrew/.linuxbrew/share/info"
 ENV HOMEBREW_NO_AUTO_UPDATE=1
 
-# Install informative git prompt for bash
+# Install informative git for bash
 RUN git clone https://github.com/magicmonty/bash-git-prompt.git ~/.bash-git-prompt --depth=1
 
 # Set up .bashrc

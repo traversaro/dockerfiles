@@ -58,7 +58,7 @@ RUN git clone https://github.com/novnc/websockify.git /opt/websockify && \
 
 # Clone noVNC
 RUN git clone https://github.com/novnc/noVNC.git /opt/novnc && \
-    echo "<html><head><meta http-equiv=\"Refresh\" content=\"0; url=vnc.html\"></head></html>" > /opt/novnc/index.html
+    echo "<html><head><meta http-equiv=\"Refresh\" content=\"0; url=vnc.html?autoconnect=true\"></head></html>" > /opt/novnc/index.html
 
 # Install dependencies
 RUN apt install -y libeigen3-dev build-essential cmake cmake-curses-gui coinor-libipopt-dev freeglut3-dev \

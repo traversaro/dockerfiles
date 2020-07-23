@@ -121,7 +121,7 @@ RUN git config --global url."https://$GITHUB_TOKEN:@github.com/".insteadOf "http
 # Set environmental variables
 ENV DISPLAY=:1
 ENV ICUBcontrib_DIR=/workspace/iCubContrib
-ENV YARP_DATA_DIRS=/usr/local/share/yarp:/usr/local/share/iCub:$ICUBcontrib_DIR/share/ICUBcontrib
+ENV YARP_DATA_DIRS=/usr/local/share/yarp:/usr/local/share/iCub:${ICUBcontrib_DIR}/share/ICUBcontrib
 ENV LD_LIBRARY_PATH=/usr/local/lib:/usr/local/lib/yarp:/usr/local/lib/robottestingframework
 
 # Create user gitpod

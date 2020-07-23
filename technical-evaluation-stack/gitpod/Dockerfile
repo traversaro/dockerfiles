@@ -149,9 +149,6 @@ RUN echo "unalias code 2>/dev/null" >> ~/.bashrc && \
     echo "source ${HOME}/.bash-git-prompt/gitprompt.sh" >> ~/.bashrc && \
     echo "export PATH=${PATH}:${ICUBcontrib_DIR}/bin" >> ~/.bashrc
 
-# Set keyboard rate
-COPY --chown=gitpod:gitpod keyboards.xml .config/xfce4/xfconf/xfce-perchannel-xml/keyboards.xml
-
 # Switch back to root
 USER root
 

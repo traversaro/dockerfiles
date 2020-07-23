@@ -133,6 +133,7 @@ RUN useradd -l -u 33333 -G sudo -md /home/gitpod -s /bin/bash -p gitpod gitpod &
 USER gitpod
 
 # Set keyboard rate
+RUN mkdir -p /home/gitpod/.config/xfce4/xfconf/xfce-perchannel-xml
 COPY keyboard.xml /home/gitpod/.config/xfce4/xfconf/xfce-perchannel-xml/keyboard.xml
 
 # Install Homebrew

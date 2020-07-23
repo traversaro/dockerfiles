@@ -132,10 +132,6 @@ RUN useradd -l -u 33333 -G sudo -md /home/gitpod -s /bin/bash -p gitpod gitpod &
 # Switch to gitpod user
 USER gitpod
 
-# Set keyboard rate
-RUN mkdir -p /home/gitpod/.config/xfce4/xfconf/xfce-perchannel-xml
-COPY keyboard.xml /home/gitpod/.config/xfce4/xfconf/xfce-perchannel-xml/keyboard.xml
-
 # Install Homebrew
 RUN mkdir ~/.cache && sh -c "$(curl -fsSL https://raw.githubusercontent.com/Linuxbrew/install/master/install.sh)"
 ENV PATH="${PATH}:/home/linuxbrew/.linuxbrew/bin:/home/linuxbrew/.linuxbrew/sbin/"
@@ -152,6 +148,9 @@ RUN echo "unalias code 2>/dev/null" >> ~/.bashrc && \
     echo "GIT_PROMPT_ONLY_IN_REPO=1" >> ~/.bashrc && \
     echo "source ${HOME}/.bash-git-prompt/gitprompt.sh" >> ~/.bashrc && \
     echo "export PATH=${PATH}:${ICUBcontrib_DIR}/bin" >> ~/.bashrc
+
+# Set keyboard rate
+COPY --chown=gitpod:gitpod keyboards.xml .config/xfce4/xfconf/xfce-perchannel-xml/keyboards.xml
 
 # Switch back to root
 USER root

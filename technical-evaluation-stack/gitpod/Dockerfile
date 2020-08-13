@@ -197,6 +197,9 @@ EXPOSE 6080
 # Manage yarp port
 EXPOSE 10000/tcp 10000/udp
 
+# Clean up unnecessary installation products
+RUN rm -Rf /var/lib/apt/lists/*
+
 # Launch bash from /workspace
 WORKDIR /workspace
 CMD ["bash"]

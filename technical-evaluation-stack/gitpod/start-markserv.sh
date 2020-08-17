@@ -1,1 +1,1 @@
-cd /workspace && markserv --browser false -a 0.0.0.0 -p 8080 &
+cd /workspace && nohup markserv --browser false -a localhost -p 8080 > /dev/null 2>&1 &

@@ -1,5 +1,9 @@
 FROM ubuntu:latest
-LABEL maintainer="ugo.pattacini@iit.it"
+LABEL org.opencontainers.image.title="IIT Technical Evaluation Docker Image"
+LABEL org.opencontainers.image.description="Stack of components required to run technical evaluations on Gitpod"
+LABEL org.opencontainers.image.url="https://github.com/pattacini/dockerfiles"
+LABEL org.opencontainers.image.source="https://github.com/pattacini/dockerfiles/blob/master/technical-evaluation-stack/gitpod/Dockerfile"
+LABEL org.opencontainers.image.authors="Ugo Pattacini <ugo.pattacini@iit.it>"
 
 # Non-interactive installation mode
 ENV DEBIAN_FRONTEND=noninteractive

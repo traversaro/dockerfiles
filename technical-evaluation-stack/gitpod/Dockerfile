@@ -104,7 +104,7 @@ ARG GITHUB_TOKEN
 
 # Build audition-projects-helpers
 RUN git config --global url."https://$GITHUB_TOKEN:@github.com/".insteadOf "https://github.com/" && \
-    git clone https://github.com/dic-iit/audition-projects-helpers.git --depth 1 && \
+    git clone https://github.com/pattacini/audition-projects-helpers.git --depth 1 && \
     git config --global --remove-section url."https://$GITHUB_TOKEN:@github.com/" && \
     cd audition-projects-helpers && mkdir build && cd build && \
     cmake .. \

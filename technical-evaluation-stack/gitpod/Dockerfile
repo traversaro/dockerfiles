@@ -176,20 +176,8 @@ RUN chmod +x "/home/gitpod/Desktop/Visual Studio Code.desktop" && \
 # Make sure specific dirs are owned by gitpod user
 RUN chown -R gitpod.gitpod /home/gitpod/Desktop
 
-# Manage markserv port
-EXPOSE 8080
-
-# Manage jupyter port
-EXPOSE 8888
-
-# Manage x11vnc port
-EXPOSE 5901
-
-# Manage noVNC port
-EXPOSE 6080
-
-# Manage yarp port
-EXPOSE 10000/tcp 10000/udp
+# Manage ports
+EXPOSE 8080 8888 5901 6080 10000/tcp 10000/udp
 
 # Clean up unnecessary installation products
 RUN rm -Rf /var/lib/apt/lists/*
